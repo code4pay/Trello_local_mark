@@ -1,0 +1,13 @@
+{
+    "name" : "Trello Checked", 
+    "version": "0.1", 
+    "description" : "Add a personal checked button to cards needing review",
+    "manifest_version": 2,
+    "permissions": ["storage", "activeTab"],
+   "content_scripts": [
+   {
+     "matches": ["https://*.trello.com/*"],
+     "js": ["default.js"]
+   }
+ ]
+}
