@@ -3,16 +3,16 @@ function add_buttons (){
     var el = document.querySelector('#board > div:nth-child(6) > div > .list-cards').children
     for(child of el){
         var cardId = child.querySelector('div.list-card-details.js-card-details > span > span').innerText;
-        var before_button = child.querySelector('div.list-card-details.js-card-details > div.list-card-members.js-list-card-members');
+        var before_button = child.querySelector('div.list-card-details.js-card-details > div.badges > span.js-badges');
         var button = document.createElement('span')
         button.onclick = function (event){addToChecked(this); event.stopPropagation(); return false};
         var div =  document.createElement('div');
 
         div.appendChild(button);
         button.innerHTML = '&#10004;'; 
-        div.style.cssText = "height:10px;float:left;"; 
-
-        before_button.insertAdjacentElement('afterend', div);
+        div.className = 'badge';
+     
+        before_button.insertAdjacentElement('beforeend', div);
         console.log(cardId); 
     }
 
@@ -49,3 +49,5 @@ function updateCards() {
         }  
     }
 }
+
+
