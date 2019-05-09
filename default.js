@@ -25,6 +25,7 @@ function start () {
 }
 
 function add_buttons (){
+    
     var el = document.querySelector('#board > div:nth-child(6) > div > .list-cards').children
     for(var child of el){
         var hasButton = child.querySelector('div.list-card-cover > div.binary_check')
@@ -132,6 +133,45 @@ function card_updated (child, id, markedDate ) {
 
 }
 
+function add_standard_template () {
+
+    var description_editor = document.querySelector('div.description-edit.edit > textarea');
+    var old_desc = description_editor.value;
+    if (description_editor) {
+        fetch('https://trello.com/c/6AeR3Cdc/3-developer-topic.json')
+            .then(function(response) {
+                return response.json();
+            })
+        .then(function(template_card) {
+                template_card.desc.replace(/description here/, old_desc);
+                document.querySelector('div.description-edit.edit > textarea').value = template_card.desc.replace(/description here/, old_desc);
+        })
+    } 
+
+}
+
+document.onkeydown = keyDownEvent;
+document.onkeyup = keyUpEvent;
+var isCtrl = false;
+function keyDownEvent() {
+    var keyid = event.keyCode;
+
+    if(keyid == 17) {
+        isCtrl = true;
+    }
+}
+
+function keyUpEvent() {
+    var keyid = event.keyCode;
+
+    if(keyid == 17) {
+        isCtrl = false;
+    }
+
+    if(keyid == 89 && isCtrl == true) {
+        add_standard_template();   
+    }
+}
 
 
 
