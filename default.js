@@ -137,16 +137,19 @@ function add_standard_template () {
 
     var description_editor = document.querySelector('div.description-edit.edit > textarea');
     var old_desc = description_editor.value;
-    if (description_editor) {
-        fetch('https://trello.com/c/6AeR3Cdc/3-developer-topic.json')
-            .then(function(response) {
-                return response.json();
-            })
-        .then(function(template_card) {
-                template_card.desc.replace(/description here/, old_desc);
-                document.querySelector('div.description-edit.edit > textarea').value = template_card.desc.replace(/description here/, old_desc);
+    fetch('https://trello.com/c/6AeR3Cdc/3-developer-topic.json')
+        .then(function(response) {
+            return response.json();
         })
-    } 
+        .then(function(template_card) {
+            template_card.desc.replace(/description here/, old_desc);
+            var r = confirm("Do you want to insert the template into this card? ");
+            if (r == true) {
+                var text_area = document.querySelector('div.description-edit.edit > textarea');
+                text_area.value  = template_card.desc.replace(/description here/, old_desc);
+                text_area.style.height = text_area.scrollHeight+ 'px';
+            }
+        })
 
 }
 
