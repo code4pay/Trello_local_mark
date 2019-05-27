@@ -1,5 +1,6 @@
 var checked = {};
 var currentCards = [];
+var column_number = 5;  // number of the column to add the check. 
 // Initial delay to allow page to fully load 
 
 function icon (color){
@@ -26,7 +27,7 @@ function start () {
 
 function add_buttons (){
     
-    var el = document.querySelector('#board > div:nth-child(6) > div > .list-cards').children
+    var el = document.querySelector('#board > div:nth-child('+column_number+') > div > .list-cards').children
     for(var child of el){
         var hasButton = child.querySelector('div.list-card-cover > div.binary_check')
         if (!hasButton) {
@@ -66,7 +67,7 @@ function addToChecked(e) {
 
 
 function updateCards() {
-    var el = document.querySelector('#board > div:nth-child(6) > div > .list-cards').children ;
+    var el = document.querySelector('#board > div:nth-child('+column_number+') > div > .list-cards').children;
 
    var dataStore = JSON.parse(localStorage.getItem('binary_checked'));
 
